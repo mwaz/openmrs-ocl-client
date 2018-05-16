@@ -5,7 +5,7 @@ FROM node:9.6.1 as build-deps
 # Create a working directory for the build project
 RUN mkdir /usr/src/app
 
-# Navigate to the created working directory
+# Navigate to the created directory
 WORKDIR /usr/src/app
 
 # Create an enviroment variable for the node_modules
