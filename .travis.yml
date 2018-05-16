@@ -9,5 +9,5 @@ script:
   - npm test --coverage
 deploy:
   - docker build -t sparatan/yummypi .
-  - echo "$" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push sparatan/yummypi
