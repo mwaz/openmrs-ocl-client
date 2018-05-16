@@ -12,7 +12,7 @@ WORKDIR /urs/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # Copy the package.json and the package-lock.json to the working directory
-COPY package.json /usr/src/app/package.json
+COPY package.json package-lock.json ./
 
 RUN npm install --silent
 RUN npm install react-scripts@1.1.1 -g --silent
