@@ -6,7 +6,7 @@ FROM node:7.10 as build-deps
 WORKDIR /urs/src/app
 
 # Copy the package.json and the package-lock.json to the working directory
-COPY package.json package-lock.json ./
+COPY . .
 
 # Create an optimized build version of the project
 RUN npm build
@@ -16,7 +16,7 @@ RUN npm build
 FROM nginx:1.12-alpine
 
 # Copy the tagged files from the build to the production environmnet of the nginx server
-COPY --from=build-deps . /usr/share/nginx/html
+COPY --from=build-deps /urs/src/app/build /usr/share/nginx/html
 
 # Make port 80 available to the world outside the container
 EXPOSE 80
