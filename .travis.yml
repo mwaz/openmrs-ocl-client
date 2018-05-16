@@ -7,7 +7,7 @@ script:
   - npm install
   - npm install coveralls
   - npm test --coverage
-deploy:
+after_success:
   - docker build -t sparatan/yummypi .
   - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push sparatan/yummypi
