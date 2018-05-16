@@ -2,20 +2,25 @@
 # Use the official node:9.6.1 runtime image for the build environment and tag the build as build-deps
 FROM node:9.6.1 as build-deps
 
+# Create a working directory for the build project
 RUN mkdir /usr/src/app
 
-# Create a workking directory for the build project
+# Navigate to the created working directory
 WORKDIR /usr/src/app
 
+# Create an enviroment variable for the node_modules
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # Copy the package.json and the package-lock.json to the working directory
 COPY package.json package-lock.json ./
 
+# Install the project dependencies and silence the npm output
 RUN npm install --silent
 
+# Install react-scripts and silence the npm output
 RUN npm install react-scripts@1.1.1 -g --silent
 
+# Copy everything to the working directory
 COPY . /usr/src/app
 
 # Create an optimized build version of the project
@@ -33,21 +38,3 @@ EXPOSE 80
 
 # Run the nginx server
 CMD ["nginx", "-g", "daemon off;"]
-
-
-# # build environment
-# FROM node:9.6.1 as builder
-# RUN mkdir /usr/src/app
-# WORKDIR /usr/src/app
-# ENV PATH /usr/src/app/node_modules/.bin:$PATH
-# COPY package.json /usr/src/app/package.json
-# RUN npm install --silent
-# RUN npm install react-scripts@1.1.1 -g --silent
-# COPY . /usr/src/app
-# RUN npm run build
-
-# # production environment
-# FROM nginx:1.13.9-alpine
-# COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
