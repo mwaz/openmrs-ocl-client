@@ -6,10 +6,12 @@ FROM node:7.10 as build-deps
 WORKDIR /urs/src/app
 
 # Copy the package.json and the package-lock.json to the working directory
-COPY . .
+COPY package.json yarn.lock ./
 
 # Create an optimized build version of the project
 RUN npm build
+
+COPY . ./
 
 # Stage-2 Production Environment
 # Use the nginx 1.12-alpine runtime image for the production environment
