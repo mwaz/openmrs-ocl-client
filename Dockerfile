@@ -6,7 +6,7 @@ FROM node:7.10 as build-deps
 WORKDIR /urs/src/app
 
 # Copy the package.json and the package-lock.json to the working directory
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 # Create an optimized build version of the project
 RUN npm build
