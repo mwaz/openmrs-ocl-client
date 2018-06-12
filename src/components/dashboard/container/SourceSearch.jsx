@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchSources } from '../../../redux/actions/sources/index';
+import { fetchingOrganizations } from '../../../redux/actions/dictionaries/dictionaryActionCreators';
+
 import '../styles/index.css';
 
 import SideBar from '../components/SideNavigation';
@@ -15,6 +17,7 @@ export class SourceSearch extends Component {
       name: PropTypes.string,
     })).isRequired,
     isFetching: PropTypes.bool.isRequired,
+    fetchingOrganizations: PropTypes.func.isRequired,
   };
   constructor(props) {
     super(props);
@@ -29,6 +32,7 @@ export class SourceSearch extends Component {
 
   componentDidMount() {
     this.props.fetchSources();
+    this.props.fetchingOrganizations();
   }
 
   onSearch(event) {
@@ -89,9 +93,7 @@ export class SourceSearch extends Component {
 export const mapStateToProps = state => ({
   sources: state.sources.sources,
   isFetching: state.sources.loading,
+  organizations: state.organizations,
 });
 
-export default connect(
-  mapStateToProps,
-  { fetchSources },
-)(SourceSearch);
+export default connect(mapStateToProps, { fetchSources, fetchingOrganizations })(SourceSearch);

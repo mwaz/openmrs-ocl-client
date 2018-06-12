@@ -1,19 +1,22 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
+import { Provider } from 'react-redux';
 import {
   SourceSearch,
   mapStateToProps,
 } from '../../../components/dashboard/container/SourceSearch';
 import sources from '../../__mocks__/sources';
 
+jest.mock('../../../components/dashboard/components/dictionary/AddDictionary');
 describe('Dashboard Component', () => {
   it('should render without any sources data', () => {
     const props = {
       fetchSources: jest.fn(),
+      fetchingOrganizations: jest.fn(),
       sources: [],
       isFetching: false,
     };
-    const wrapper = mount(<SourceSearch {...props} />);
+    const wrapper = shallow(<SourceSearch {...props} />);
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -21,6 +24,7 @@ describe('Dashboard Component', () => {
   it('should render preloader spinner', () => {
     const props = {
       fetchSources: jest.fn(),
+      fetchingOrganizations: jest.fn(),
       sources: [],
       isFetching: true,
     };
@@ -32,6 +36,7 @@ describe('Dashboard Component', () => {
   it('should render with sources data', () => {
     const props = {
       fetchSources: jest.fn(),
+      fetchingOrganizations: jest.fn(),
       sources: [sources],
       isFetching: true,
     };
@@ -43,6 +48,7 @@ describe('Dashboard Component', () => {
   it('should filter sources', () => {
     const props = {
       fetchSources: jest.fn(),
+      fetchingOrganizations: jest.fn(),
       sources: [sources],
       isFetching: false,
       onSubmit: jest.fn(),
@@ -60,6 +66,7 @@ describe('Dashboard Component', () => {
   it('should search for a source', () => {
     const props = {
       fetchSources: jest.fn(),
+      fetchingOrganizations: jest.fn(),
       sources: [sources],
       isFetching: true,
     };
