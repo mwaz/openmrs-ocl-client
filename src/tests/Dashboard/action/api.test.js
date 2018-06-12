@@ -23,20 +23,18 @@ describe('Test suite for organization actions', () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
-        response: [organizations]
+        response: [organizations],
       });
     });
 
     const expectedActions = [
-      { type: FETCHING_ORGANIZATIONS, payload: [organizations] }
+      { type: FETCHING_ORGANIZATIONS, payload: [organizations] },
     ];
 
     const store = mockStore({ payload: {} });
 
     return store
-      .dispatch(
-        fetchingOrganizations('ocl', ['Dictionary'], 10, 1, 'sortAsc=name')
-      )
+      .dispatch(fetchingOrganizations('ocl', ['Dictionary'], 10, 1, 'sortAsc=name'))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });

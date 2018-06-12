@@ -1,23 +1,23 @@
 import {
   FETCHING_ORGANIZATIONS,
-  ADDING_DICTIONARY
+  ADDING_DICTIONARY,
 } from '../../../redux/actions/types';
 import {
   fetchOrganizations,
-  addDictionary
+  addDictionary,
 } from '../../../redux/actions/dictionaries/dictionaryActions';
 
 describe('Test for successful organizations fetch', () => {
   const response = {
-    data: {}
+    data: {},
   };
   const responseData = {
     type: FETCHING_ORGANIZATIONS,
-    payload: { data: {} }
+    payload: { data: {} },
   };
   const createDictionary = {
     type: ADDING_DICTIONARY,
-    payload: {}
+    payload: {},
   };
 
   it('should return action type and payload', () => {

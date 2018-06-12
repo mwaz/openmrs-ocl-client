@@ -1,6 +1,6 @@
+import { notify } from 'react-notify-toast';
 import { addDictionary, fetchOrganizations } from './dictionaryActions';
 import api from './../../api';
-import { notify } from 'react-notify-toast'
 
 export const createDictionary = data => dispatch =>
   api.dictionaries

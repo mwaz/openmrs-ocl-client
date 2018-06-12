@@ -1,14 +1,13 @@
 import React from 'react';
+import { StaticRouter } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
 import { shallow, mount } from 'enzyme';
 import AddDictionary from '../components/dashboard/components/dictionary/AddDictionary';
 import DictionaryModal from '../components/dashboard/components/dictionary/common/DictionaryModal';
-import { StaticRouter } from 'react-router-dom';
-import configureStore from 'redux-mock-store';
+
 
 jest.mock('../components/dashboard/components/dictionary/AddDictionary');
-jest.mock(
-  '../components/dashboard/components/dictionary/common/DictionaryModal'
-);
+jest.mock('../components/dashboard/components/dictionary/common/DictionaryModal');
 
 // create any initial state needed
 const initialState = {};
@@ -30,7 +29,7 @@ describe(' Dictionary Components', () => {
     const props = {
       submit: jest.fn(),
       createDictionary: jest.fn(),
-      createDictionaryUser: jest.fn()
+      createDictionaryUser: jest.fn(),
     };
     const component = shallow(<AddDictionary props={props} />);
     expect(component).toMatchSnapshot();
